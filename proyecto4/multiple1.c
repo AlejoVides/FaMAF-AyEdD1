@@ -9,9 +9,8 @@ int pedir_entero(char name) {
 }
 
 void asig_mult(int x, int y) {
-	int xaux, yaux;
-	xaux = x;
-	yaux = y;
+	int xaux = x;
+	int yaux = y;
 
 	printf("{Pre: x = X, y = Y}\n");
 	printf("  x = %d, y = %d\n", x, y);
