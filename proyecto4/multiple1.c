@@ -14,18 +14,18 @@ void imprimir_entero(char name, int var) {
 }
 
 void asig_mult(int x, int y) {
-  	int X = x;
-  	int Y = y;
+	int X = x;
+	int Y = y;
 
 	// {Pre: x = X, y = Y}
 	assert(x==X && y==Y);
-    	x = X + 1;
-    	y = X + Y;
+	x = X + 1;
+	y = X + Y;
 
-    	// {Post: x = X + 1, y = X + Y}
-    	assert(x==X+1 && y==X+Y);
-   	imprimir_entero('x', x);
-   	imprimir_entero('y', y);
+	// {Post: x = X + 1, y = X + Y}
+	assert(x==X+1 && y==X+Y);
+	imprimir_entero('x', x);
+	imprimir_entero('y', y);
 }
 
 int main(void) {
