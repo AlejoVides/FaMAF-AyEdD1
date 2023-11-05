@@ -9,10 +9,9 @@ int pedir_entero(char name) {
 }
 
 void simple(int x, int y, int z) {
-	int xaux, yaux, zaux;
-	xaux = x;
-	yaux = y;
-	zaux = z;
+	int xaux = x;
+	int yaux = y;
+	int zaux = z;
 
 	printf("{Pre: x = X, y = Y, z = Z}\n");
 	printf("  x = %d, y = %d, z = %d\n", x, y, z);
