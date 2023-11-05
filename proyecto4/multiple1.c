@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 
 int pedir_entero(char name) {
 	int var;
@@ -8,18 +9,23 @@ int pedir_entero(char name) {
 	return var;
 }
 
+void imprimir_entero(char name, int var) {
+	printf("%c = %d\n", name, var);
+}
+
 void asig_mult(int x, int y) {
-	int xaux = x;
-	int yaux = y;
+  	int X = x;
+  	int Y = y;
 
-	printf("{Pre: x = X, y = Y}\n");
-	printf("  x = %d, y = %d\n", x, y);
+	// {Pre: x = X, y = Y}
+	assert(x==X && y==Y);
+    	x = X + 1;
+    	y = X + Y;
 
-	x = xaux + 1;
-	y = xaux + yaux;
-
-	printf("{Post: x = X + 1, y = X + Y}\n");
-	printf("  x = %d, y = %d\n", x, y);
+    	// {Post: x = X + 1, y = X + Y}
+    	assert(x==X+1 && y==X+Y);
+   	imprimir_entero('x', x);
+   	imprimir_entero('y', y);
 }
 
 int main(void) {
@@ -35,8 +41,13 @@ gcc -Wall -Wextra -std=c99 multiple1.c -o proyecto4_2c
 ./proyecto4_2c
 Ingrese un valor para x: 3
 Ingrese un valor para y: 4
-{Pre: x = X, y = Y}
-  x = 3, y = 4
-{Post: x = X + 1, y = X + Y}
-  x = 4, y = 7
+x = 4
+y = 7
+
+
+./proyecto4_2c
+Ingrese un valor para x: 5
+Ingrese un valor para y: 8
+x = 6
+y = 13
 */
