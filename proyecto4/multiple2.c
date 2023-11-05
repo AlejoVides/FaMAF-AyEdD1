@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 
 int pedir_entero(char name) {
 	int var;
@@ -8,20 +9,26 @@ int pedir_entero(char name) {
 	return var;
 }
 
-void simple(int x, int y, int z) {
-	int xaux = x;
-	int yaux = y;
-	int zaux = z;
+void imprimir_entero(char name, int var) {
+	printf("%c = %d\n", name, var);
+}
 
-	printf("{Pre: x = X, y = Y, z = Z}\n");
-	printf("  x = %d, y = %d, z = %d\n", x, y, z);
+void asig_mult(int x, int y, int z) {
+	int X = x;
+	int Y = y;
+	int Z = z;
 
-	x = yaux;
-	y = yaux + xaux + zaux;
-	z = yaux * xaux;
+	// {Pre: x = X, y = Y, z = Z}
+	assert(x==X && y==Y && z==Z);
+	x = Y;
+	y = Y + X + Z;
+	z = Y * X;
 
-	printf("{Post: x = Y, y = Y + X + Z, z = Y + X}\n");
-	printf("  x = %d, y = %d, z = %d\n", x, y, z);
+	// {Post: x = Y, y = Y + X + Z, z = Y + X}
+	assert(x==Y && y==Y+X+Z && z==Y+X);
+	imprimir_entero('x', x);
+	imprimir_entero('y', y);
+	imprimir_entero('z', z);
 }
 
 int main(void) {
@@ -29,18 +36,17 @@ int main(void) {
 	int y = pedir_entero('y');
 	int z = pedir_entero('z');
 
-	simple(x, y, z);
+	asig_mult(x, y, z);
 	return 0;
 }
 
 /*
 gcc -Wall -Wextra -std=c99 multiple2.c -o proyecto4_2d
 ./proyecto4_2d
-Ingrese un valor para x: 2
-Ingrese un valor para y: 4
-Ingrese un valor para z: 6
-{Pre: x = X, y = Y, z = Z}
-  x = 2, y = 4, z = 6
-{Post: x = Y, y = Y + X + Z, z = Y + X}
-  x = 4, y = 12, z = 8
+Ingrese un valor para x: 0
+Ingrese un valor para y: 0
+Ingrese un valor para z: 1
+x = 0
+y = 1
+z = 0
 */
