@@ -502,30 +502,64 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
 -- 15(*) Para cada uno de los siguientes patrones, decidı si estan bien tipados, y en tal caso da los tipos de cada subexpresion.
 {- a) f :: (a, b) -> ...
       f (x, y) = ...
-      
+
+    (x,y) :: (a,b)
+    x :: a
+    y :: b
+
+    Si cubre todos los casos.
+
+
    b) f :: [(a, b)] -> ...
       f (a, b) = ...
-      
+
+    Mal tipado, cubre tuplas pero requiere lista de tuplas.
+
+
    c) f :: [(a, b)] -> ...
       f (x:xs) = ...
+
+    Buen tipado pero no cubre el caso de lista vacía.
+
 
    d) f :: [(a, b)] -> ...
       f ((x, y) : ((a, b) : xs)) = ...
 
+    Buen tipado pero no cubre el caso de lista vacía ni el caso de un solo elemento.
+
+
    e) f :: [(Int, a)] -> ...
       f [(0, a)] = ...
+
+    Buen tipado pero no cubre el caso de lista vacía ni ningún caso en donde el primer elemento no sea 0.
+
 
    f) f :: [(Int, a)] -> ...
       f ((x, 1) : xs) = ...
 
+    Buen tipado pero no cubre el caso de lista vacía ni ningún caso en donde el segundo elemento no sea 1.
+
+
    g) f :: (Int -> Int) -> Int -> ...
       f a b = ...
+
+    (a, b) :: ((Int -> Int), Int)
+    a :: (Int -> Int)
+    b :: Int
+
+    Si cubre todos los casos.
+
 
    h) f :: (Int -> Int) -> Int -> ...
       f a 3 = ...
 
+    Buen tipado pero no cubre ningún caso en donde el segundo elemento no sea 3.
+
+
    i) f :: (Int -> Int) -> Int -> ...
       f 0 1 2 = ...
+
+    Mal tipado, cubre el caso Int -> Int -> Int pero f requiere (Int -> Int) -> Int.
 -}
 
 
@@ -534,11 +568,11 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
       f (x, y) = y
 
    b) f :: (a, b) -> c
-      f (x, y) = z
+      f (x, y) = x*y
 
    c) f :: (a -> b) -> a -> b
       f p x = y
 
    d) f :: (a -> b) -> [a] -> [b]
-      f p [x] = [y]
+      f p xs = filter p xs
 -}
