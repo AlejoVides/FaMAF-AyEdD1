@@ -24,6 +24,14 @@ int main(void) {
 }
 
 /*
+- Derivación -
+	Var x, y, temp : Int;
+	{ P: True }
+	temp := x
+	x := y
+	y := temp
+	{ Q: x, y = y, x }
+
 gcc -Wall -Wextra -std=c99 intercambio.c -o proyecto4_1d
 ./proyecto4_1d
 Ingrese un valor para x: 4
