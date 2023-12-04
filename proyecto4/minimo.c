@@ -26,6 +26,15 @@ int main(void) {
 }
 
 /*
+- Derivación -
+	Const x, y : Int;
+	Var res : Int;
+	{ P: True }
+	if x <= y -> res := x
+	[] x > y -> res := y
+	fi
+	{ Q: res = x min y }
+
 gcc -Wall -Wextra -std=c99 minimo.c -o proyecto4_1b
 ./proyecto4_1b
 Ingrese un valor para x: 2
