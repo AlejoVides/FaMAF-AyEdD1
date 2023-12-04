@@ -25,6 +25,15 @@ int main(void) {
 }
 
 /*
+- Derivación -
+	Const n : Int;
+	Var res : Int;
+	{ P: True }
+	if x >= 0 -> res := x
+	[] x < 0  -> res := -x
+	fi
+	{ Q: res = |x| }
+
 gcc -Wall -Wextra -std=c99 absoluto.c -o proyecto4_1c
 ./proyecto4_1c
 Ingrese un valor para n: 5
