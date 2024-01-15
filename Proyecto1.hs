@@ -138,7 +138,7 @@ todosPares xs = paratodo' xs even
 -- 6b) hayMultiplo::Int->[Int]->Bool verifica si existe algun numero dentro del segundo parametro que sea multiplo del primer parametro.
 -- funcion auxiliar para hayMultiplo.
 modulo :: Int -> Int -> Bool
-modulo n x = (mod n x) == 0
+modulo n x = (mod x n) == 0
 
 hayMultiplo :: Int -> [Int] -> Bool
 hayMultiplo n xs = existe' xs (modulo n)
@@ -146,11 +146,20 @@ hayMultiplo n xs = existe' xs (modulo n)
 -- hayMultiplo 4 [6,8] = True
 
 {- hayMultiplo 2 [1,2] = existe' [1,2] modulo 2
-                     = modulo 2 1 || (existe' [2] modulo 2)
-                     = False || (modulo 2 2 || existe' [] modulo 2)
-                     = False || (True || False)
-                     = False || True
-                     = True
+                       = modulo 2 1 || (existe' [2] modulo 2)
+                       = False || modulo 2 2 || (existe' [] modulo 2)
+                       = False || True || False
+                       = False || True
+                       = True
+
+   hayMultiplo 3 [2,6,5] = existe' [2,6,5] modulo 3
+                         = modulo 3 2 || (existe' [6,5] modulo 3)
+                         = False || modulo 3 6 || (existe' [5] modulo 3)
+                         = False || True || modulo 3 5 || (existe' [] modulo 3)
+                         = False || True || False || False
+                         = False || True || False
+                         = False || True
+                         = True
 -}
 
 
@@ -186,7 +195,7 @@ existeDivisor n ls = existe' ls (modulo n)
                          = False || (False || False)
                          = False || False
                          = False
-   
+
    existeDivisor 4 [2,3] = existe' [2,3] modulo 4
                          = modulo 4 2 || (existe' [3] modulo 4)
                          = True || (modulo 4 3 || existe' [] modulo 4)
@@ -403,7 +412,7 @@ primIgualesA' n [] = []
 primIgualesA' n xs = takeWhile (==n) xs
 
 
-{- 11) La funcion primIguales toma una lista y devuelve el mayor tramo inicial de la lista cuyos elementos son todos iguales entre sı. Por ejemplo:
+{- 11) La funcion primIguales toma una lista y devuelve el mayor tramo inicial de la lista cuyos elementos son todos iguales entre si. Por ejemplo:
        primIguales [3,3,4,1] = [3,3]
        primIguales [4,3,3,4,1] = [4]
        primIguales [] = []
@@ -423,58 +432,51 @@ primIguales' xs = primIgualesA' (head xs) xs
 -- 12(*) Reescribir todas las funciones del punto 4 utilizando el cuantificador generalizado (sin usar induccion y en una linea por funcion).
 -- funcion auxiliar para redefinir las funciones del punto 4.
 cuantGen :: (b -> b -> b) -> b -> [a] -> (a -> b) -> b
-cuantGen op z xs t = foldr op z (map t xs)
-
-{-
-foldr :: (a -> b -> b) -> b -> [a] -> b
-foldr op z [] = z
-foldr op z (x:xs) = op x (foldr op z xs)
--}
+cuantGen op z [] t = z
+cuantGen op z (x:xs) t = op (t x) (cuantGen op z xs t)
 
 paratodoGen :: [a] -> (a -> Bool) -> Bool
 paratodoGen xs t = cuantGen (&&) True xs t
 {- paratodoGen [2,3,4] even = cuantGen (&&) True [2,3,4] even
-                            = foldr (&&) True (map even [2,3,4])
-                            = foldr (&&) True [True, False, True]
-                            = True (foldr (&&) True [False, True])
-                            = True && False (foldr (&&) True [True])
-                            = True && False && True (foldr (&&) True [])
+                            = && (even 2) (cuantGen && True [3,4] even)
+                            = True && (even 3) (cuantGen && True [4] even)
+                            = True && False && (even 4) (cuantGen && True [] even)
                             = True && False && True && True
+                            = True && False && True
+                            = True && False
                             = False
 -}
 
 existeGen :: [a] -> (a -> Bool) -> Bool
 existeGen xs t = cuantGen (||) False xs t
 {- existeGen [7,8,9] esPrimo = cuantGen (||) False [7,8,9] esPrimo
-                             = foldr (||) False (map esPrimo [7,8,9])
-                             = foldr (||) False [True, False, False]
-                             = True (foldr (||) False [False, False])
-                             = True || False (foldr (||) False [False])
-                             = True || False || False (foldr (||) False [])
+                             = || (esPrimo 7) (cuantGen || False [8,9] esPrimo)
+                             = True || (esPrimo 8) (cuantGen || False [9] esPrimo)
+                             = True || False || (esPrimo 9) (cuantGen || False [] esPrimo)
                              = True || False || False || False
+                             = True || False || False
+                             = True || False
                              = True
 -}
 
 sumatoriaGen :: [a] -> (a -> Int) -> Int
 sumatoriaGen xs t = cuantGen (+) 0 xs t
 {- sumatoriaGen [2,3,4] (+2) = cuantGen (+) 0 [2,3,4] (+2)
-                             = foldr (+) 0 (map (+2) [2,3,4])
-                             = foldr (+) 0 [4,6,8]
-                             = 4 (foldr (+) 0 [6,8])
-                             = 4 + 6 (foldr (+) 0 [8])
-                             = 4 + 6 + 8 (foldr (+) 0 [])
-                             = 4 + 6 + 8 + 0
+                             = + (+2 2) (cuantGen + 0 [3,4] +2)
+                             = 4 + (+2 3) (cuantGen + 0 [4] +2)
+                             = 4 + 5 + (+2 4) (cuantGen + 0 [] +2)
+                             = 4 + 5 + 6 + 0
+                             = 4 + 5 + 6
+                             = 4 + 11
                              = 15
 -}
 
 productoriaGen :: [a] -> (a -> Int) -> Int
 productoriaGen xs t = cuantGen (*) 1 xs t
 {- productoriaGen [7,8,9] (+3) = cuantGen (*) 1 [7,8,9] (+3)
-                               = foldr (*) 1 (map (+3) [7,8,9])
-                               = foldr (*) 1 [10,11,12]
-                               = 10 (foldr (*) 1 [11,12])
-                               = 10 * 11 (foldr (*) 1 [12])
-                               = 10 * 11 * 12 (foldr (*) 1 [])
+                               = * (+3 7) (cuantGen * 1 [8,9] +3)
+                               = 10 * (+3 8) (cuantGen * 1 [9] +3)
+                               = 10 * 11 * (+3 9) (cuantGen * 1 [] +3)
                                = 10 * 11 * 12 * 1
                                = 1320
 -}
@@ -490,16 +492,16 @@ distanciaEdicion (x:xs) (y:ys) | (x==y) = distanciaEdicion xs ys
 -- distanciaEdicion "hablar" "hablaba" = 2
 
 
--- 14(*) Definı una funcion primeros que cumplen, primQueCumplen::[a]->(a->Bool)->[a], tal que, dada una lista ls y un predicado p, devuelve el tramo inicial de ls que cumple p.
+-- 14(*) Defini una funcion primeros que cumplen, primQueCumplen::[a]->(a->Bool)->[a], tal que, dada una lista ls y un predicado p, devuelve el tramo inicial de ls que cumple p.
 primQueCumplen :: [a] -> (a -> Bool) -> [a]
 primQueCumplen [] p = []
 primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
-                        | otherwise = primQueCumplen ls p
--- primQueCumplen [2,3,4] even = [2,4]
+                        | otherwise = []
+-- primQueCumplen [2,4,5,6,7,8] even = [2,4]
 -- primQueCumplen [-1,-2,-3] esPositivo = []
 
 
--- 15(*) Para cada uno de los siguientes patrones, decidı si estan bien tipados, y en tal caso da los tipos de cada subexpresion.
+-- 15(*) Para cada uno de los siguientes patrones, decidi si estan bien tipados, y en tal caso da los tipos de cada subexpresion.
 {- a) f :: (a, b) -> ...
       f (x, y) = ...
 
@@ -519,25 +521,25 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
    c) f :: [(a, b)] -> ...
       f (x:xs) = ...
 
-    Buen tipado pero no cubre el caso de lista vacía.
+    Buen tipado pero no cubre el caso de lista vacia.
 
 
    d) f :: [(a, b)] -> ...
       f ((x, y) : ((a, b) : xs)) = ...
 
-    Buen tipado pero no cubre el caso de lista vacía ni el caso de un solo elemento.
+    Buen tipado pero no cubre el caso de lista vacia ni el caso de un solo elemento.
 
 
    e) f :: [(Int, a)] -> ...
       f [(0, a)] = ...
 
-    Buen tipado pero no cubre el caso de lista vacía ni ningún caso en donde el primer elemento no sea 0.
+    Buen tipado pero no cubre el caso de lista vacia ni ningun caso en donde el primer elemento no sea 0.
 
 
    f) f :: [(Int, a)] -> ...
       f ((x, 1) : xs) = ...
 
-    Buen tipado pero no cubre el caso de lista vacía ni ningún caso en donde el segundo elemento no sea 1.
+    Mal tipado, usa el tipo polimorfico a pero se define usando la constante 1 sin usar polimorfismo adhoc.
 
 
    g) f :: (Int -> Int) -> Int -> ...
@@ -553,7 +555,7 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
    h) f :: (Int -> Int) -> Int -> ...
       f a 3 = ...
 
-    Buen tipado pero no cubre ningún caso en donde el segundo elemento no sea 3.
+    Buen tipado pero no cubre ningun caso en donde el segundo elemento no sea 3.
 
 
    i) f :: (Int -> Int) -> Int -> ...
@@ -568,11 +570,11 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
       f (x, y) = y
 
    b) f :: (a, b) -> c
-      f (x, y) = x*y
+    No existe funcion tal que pueda cumpir (a, b) -> c, dado que no se pueden comparar elementos de distinto tipo para dar con un tercer tipo.
 
    c) f :: (a -> b) -> a -> b
       f p x = y
 
    d) f :: (a -> b) -> [a] -> [b]
-      f p xs = filter p xs
+      f p xs = map p xs
 -}
