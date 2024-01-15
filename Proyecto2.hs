@@ -94,7 +94,7 @@ contar_velocistas ((_):xs) = contar_velocistas xs
 -- contar_velocistas [Velocista(1), Futbolista(Delantera)(10)(Izquierda)(170)] = 1
 
 
--- d) Programa la funcion contar_futbolistas :: [Deportista] -> Zona -> Int que dada una lista de deportistas xs, y una zona z, devuelve la cantidad de futbolistas incluidos en xs que juegan en la zona z. No usar igualdad, solo pattern matching.
+-- 4d) Programa la funcion contar_futbolistas :: [Deportista] -> Zona -> Int que dada una lista de deportistas xs, y una zona z, devuelve la cantidad de futbolistas incluidos en xs que juegan en la zona z. No usar igualdad, solo pattern matching.
 contar_futbolistas :: [Deportista] -> Zona -> Int
 contar_futbolistas [] z = 0
 contar_futbolistas ((Futbolista (Arco)(_)(_)(_)):xs) Arco             = 1 + contar_futbolistas xs Arco
@@ -353,3 +353,47 @@ a_inc' Hoja = Hoja
 a_inc' (Rama ar1 n ar2) = a_map (+1) (Rama ar1 n ar2)
 -- a_inc' arbolEj1 = Rama (Rama Hoja 2 Hoja) 3 (Rama Hoja 4 Hoja)
 -- a_inc' arbolEj3 = Rama (Rama Hoja 0 Hoja) 1 Hoja
+
+
+-- 10(*) Programa las siguientes funciones:
+-- 10a) Definir el tipo recursivo ABB utilizando los constructores:
+data ABB a = VacioABB | RamaABB (ABB a) a (ABB a) deriving (Show)
+
+
+-- 10b) Definir una funcion insertarABB que tome un valor y un arbol binario como entrada y devuelva un nuevo arbol que contenga el valor insertado en el arbol original. La funcion tiene que tener el siguiente tipado: insertarABB::Ord a=>a->ABB a->ABB a.
+insertarABB :: Ord a => a -> ABB a -> ABB a
+insertarABB n VacioABB = RamaABB VacioABB n VacioABB
+insertarABB n (RamaABB ramaIzq x ramaDer) | (n<=x) = RamaABB (insertarABB n ramaIzq) x ramaDer
+                                          | otherwise = RamaABB ramaIzq x (insertarABB n ramaDer)
+-- insertarABB 3 (RamaABB VacioABB 4 (RamaABB VacioABB 6 VacioABB)) = RamaABB (RamaABB VacioABB 3 VacioABB) 4 (RamaABB VacioABB 6 VacioABB)
+-- insertarABB 5 (RamaABB (RamaABB VacioABB 3 VacioABB) 4 VacioABB) = RamaABB (RamaABB VacioABB 3 VacioABB) 4 (RamaABB VacioABB 5 VacioABB)
+
+
+-- 10c) Define una funcion llamada buscarEnArbol que tome un valor y un arbol binario como entrada y devuelva True si el valor esta presente en el arbol y False en caso contrario. La funcion tiene que tener el siguiente tipado: buscarABB::Eq a=>a->ABB a->Bool.
+buscarEnArbol :: Eq a => a -> ABB a -> Bool
+buscarEnArbol n VacioABB = False
+buscarEnArbol n (RamaABB ramaIzq x ramaDer) | (n==x) = True
+                                            | otherwise = buscarEnArbol n ramaIzq || buscarEnArbol n ramaDer
+-- buscarEnArbol 4 (RamaABB VacioABB 5 (RamaABB VacioABB 7 (RamaABB (RamaABB VacioABB 9 VacioABB) 8 VacioABB))) = False
+-- buscarEnArbol 9 (RamaABB VacioABB 5 (RamaABB VacioABB 7 (RamaABB (RamaABB VacioABB 9 VacioABB) 8 VacioABB))) = True
+
+
+-- 10d) Definir la funcion verificarABB que devuelve True si el arbol cumple con la propiedad fundamental o False en caso contrario.
+mayor_a_todos :: Ord a => a -> ABB a -> Bool
+mayor_a_todos n VacioABB = True
+mayor_a_todos n (RamaABB ramaIzq x ramaDer) | (n>x) = mayor_a_todos n ramaIzq && mayor_a_todos n ramaDer
+                                            | otherwise = False 
+
+menor_a_todos :: Ord a => a -> ABB a -> Bool
+menor_a_todos n VacioABB = True
+menor_a_todos n (RamaABB ramaIzq x ramaDer) | (n<x) = menor_a_todos n ramaIzq && menor_a_todos n ramaDer
+                                            | otherwise = False 
+
+verificarABB :: Ord a => ABB a -> Bool
+verificarABB VacioABB = True
+verificarABB (RamaABB ramaIzq n ramaDer) = (mayor_a_todos n ramaIzq) && (menor_a_todos n ramaDer)
+
+ejemplo1 = RamaABB (RamaABB VacioABB 10 VacioABB) 2 (RamaABB VacioABB 11 VacioABB)
+ejemplo2 = RamaABB (RamaABB (RamaABB VacioABB 1 VacioABB) 3 (RamaABB VacioABB 7 VacioABB)) 5 (RamaABB VacioABB 8 (RamaABB VacioABB 10 VacioABB))
+-- verificarABB ejemplo1 = False
+-- verificarABB ejemplo2 = False
