@@ -1,4 +1,16 @@
+/*
+- Derivación -
+	Var x, y, tempX, tempY : Int;
+	{ P: True }
+	tempX := x;
+	tempY := y;
+	x := tempX;
+	y := tempY
+	{ Q: x, y = tempY, tempX }
+*/
+
 #include <stdio.h>
+#include <assert.h>
 
 int pedir_entero(char name) {
 	int var;
@@ -9,29 +21,24 @@ int pedir_entero(char name) {
 }
 
 void intercambio(int x, int y){
-	int temp = x;
-	x = y;
-	y = temp;
+	int tempX = x, tempY = y;
+	x = tempY;
+	y = tempX;
+	
+	assert(x == tempY && y == tempX);
 	printf("(x = %d | y = %d)\n", x, y);
 }
 
 int main(void) {
 	int x = pedir_entero('x');
 	int y = pedir_entero('y');
+	assert((x>=0 || x<=0) && (y>=0 || y<=0));
 
 	intercambio(x, y);
 	return 0;
 }
 
 /*
-- Derivación -
-	Var x, y, temp : Int;
-	{ P: True }
-	temp := x
-	x := y
-	y := temp
-	{ Q: x, y = y, x }
-
 gcc -Wall -Wextra -std=c99 intercambio.c -o proyecto4_1d
 ./proyecto4_1d
 Ingrese un valor para x: 4
