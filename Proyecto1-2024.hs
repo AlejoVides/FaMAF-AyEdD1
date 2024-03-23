@@ -33,7 +33,7 @@ valorAbsoluto x | (x >= 0) = x
 -- paratodo :: [Bool] -> Bool, que verifica que todos los elementos de una lista sean True.
 paratodo :: [Bool] -> Bool
 paratodo [] = True
-paratodo (x:xs) = x ^ paratodo xs
+paratodo (x:xs) = x && paratodo xs
 -- paratodo [True, True, False] = False
 -- paratodo [True, True] = True
 
@@ -137,15 +137,6 @@ hayMultiplo n (x:xs) = (mod x n == 0) || hayMultiplo n xs
 -- hayMultipo 3 [4,5] = False
 -- hayMultipo 4 [6,8] = True
 
-{-
--- funcion auxiliar para hayMultiplo.
-modulo :: Int -> Int -> Bool
-modulo n x = (mod x n) == 0
-
-hayMultiplo :: Int -> [Int] -> Bool
-hayMultiplo n xs = existe' xs (modulo n)
--}
-
 
 -- 6c) sumaCuadrados :: Int -> Int, dado un numero no negativo n, calcula la suma de los primeros n cuadrados, es decir {Σi : 0 ≤ i < n : i^2}.
 sumaCuadrados :: Int -> Int
@@ -175,10 +166,6 @@ factorial' n = productoria [1..n]
 -- factorial 5 = 120
 -- factorial 8 = 40320
 
-{-
-factorial' :: Int -> Int
-factorial' n = n * factorial (n-1)
--}
 
 -- 6g) Programar la funcion multiplicaPrimos :: [Int] -> Int que calcula el producto de todos los numeros primos de una lista.
 -- funcion auxiliar para multiplicaPrimos.
@@ -337,49 +324,26 @@ cuantGen op z (x:xs) t = op (t x) (cuantGen op z xs t)
 
 paratodoGen :: [a] -> (a -> Bool) -> Bool
 paratodoGen xs t = cuantGen (&&) True xs t
-{- paratodoGen [2,3,4] even = cuantGen (&&) True [2,3,4] even
-                            = && (even 2) (cuantGen && True [3,4] even)
-                            = True && (even 3) (cuantGen && True [4] even)
-                            = True && False && (even 4) (cuantGen && True [] even)
-                            = True && False && True && True
-                            = True && False && True
-                            = True && False
-                            = False 
--}
+-- paratodoGen [2,3,4] even = False
+-- paratodoGen [2,4,6] even = True
+
 
 existeGen :: [a] -> (a -> Bool) -> Bool
 existeGen xs t = cuantGen (||) False xs t
-{- existeGen [7,8,9] esPrimo = cuantGen (||) False [7,8,9] esPrimo
-                             = || (esPrimo 7) (cuantGen || False [8,9] esPrimo)
-                             = True || (esPrimo 8) (cuantGen || False [9] esPrimo)
-                             = True || False || (esPrimo 9) (cuantGen || False [] esPrimo)
-                             = True || False || False || False
-                             = True || False || False
-                             = True || False
-                             = True
--}
+-- existeGen [7,8,9] esPrimo = True
+-- existeGen [8,9,10] esPrimo = False
+
 
 sumatoriaGen :: [a] -> (a -> Int) -> Int
 sumatoriaGen xs t = cuantGen (+) 0 xs t
-{- sumatoriaGen [2,3,4] (+2) = cuantGen (+) 0 [2,3,4] (+2)
-                             = + (+2 2) (cuantGen + 0 [3,4] +2)
-                             = 4 + (+2 3) (cuantGen + 0 [4] +2)
-                             = 4 + 5 + (+2 4) (cuantGen + 0 [] +2)
-                             = 4 + 5 + 6 + 0
-                             = 4 + 5 + 6
-                             = 4 + 11
-                             = 15
--}
+-- sumatoriaGen [2,3,4] (+2) = 15
+-- sumatoriaGen [2,3,4] (*3) = 27
+
 
 productoriaGen :: [a] -> (a -> Int) -> Int
 productoriaGen xs t = cuantGen (*) 1 xs t
-{- productoriaGen [7,8,9] (+3) = cuantGen (*) 1 [7,8,9] (+3)
-                               = * (+3 7) (cuantGen * 1 [8,9] +3)
-                               = 10 * (+3 8) (cuantGen * 1 [9] +3)
-                               = 10 * 11 * (+3 9) (cuantGen * 1 [] +3)
-                               = 10 * 11 * 12 * 1
-                               = 1320
--}
+-- productoriaGen [7,8,9] (+3) = 1320
+-- productoriaGen [4,5,6] (*3) = 3240
 
 
 -- 13(*) Definir una funcion que se denomina distancia de edicion. Que toma como entrada dos strings (lista de caracteres). distanciaEdicion :: [Char] -> [Char] -> Int.
@@ -408,37 +372,31 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
     (x,y) :: (a,b)
     x :: a
     y :: b
-
     Si cubre todos los casos.
 
 
    b) f :: [(a, b)] -> ...
       f (a, b) = ...
-
     Mal tipado, cubre tuplas pero requiere lista de tuplas.
 
 
    c) f :: [(a, b)] -> ...
       f (x:xs) = ...
-
     Buen tipado pero no cubre el caso de lista vacia.
 
 
    d) f :: [(a, b)] -> ...
       f ((x, y) : ((a, b) : xs)) = ...
-
     Buen tipado pero no cubre el caso de lista vacia ni el caso de un solo elemento.
 
 
    e) f :: [(Int, a)] -> ...
       f [(0, a)] = ...
-
     Buen tipado pero no cubre el caso de lista vacia ni ningun caso en donde el primer elemento no sea 0.
 
 
    f) f :: [(Int, a)] -> ...
       f ((x, 1) : xs) = ...
-
     Mal tipado, usa el tipo polimorfico a pero se define usando la constante 1 sin usar polimorfismo adhoc.
 
 
@@ -448,19 +406,16 @@ primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
     (a, b) :: ((Int -> Int), Int)
     a :: (Int -> Int)
     b :: Int
-
     Si cubre todos los casos.
 
 
    h) f :: (Int -> Int) -> Int -> ...
       f a 3 = ...
-
     Buen tipado pero no cubre ningun caso en donde el segundo elemento no sea 3.
 
 
    i) f :: (Int -> Int) -> Int -> ...
       f 0 1 2 = ...
-
     Mal tipado, cubre el caso Int -> Int -> Int pero f requiere (Int -> Int) -> Int.
 -}
 
