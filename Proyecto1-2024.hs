@@ -33,8 +33,7 @@ valorAbsoluto x | (x >= 0) = x
 -- paratodo :: [Bool] -> Bool, que verifica que todos los elementos de una lista sean True.
 paratodo :: [Bool] -> Bool
 paratodo [] = True
-paratodo (x:xs) | (x == True) = paratodo xs
-                | otherwise = False
+paratodo (x:xs) = x ^ paratodo xs
 -- paratodo [True, True, False] = False
 -- paratodo [True, True] = True
 
