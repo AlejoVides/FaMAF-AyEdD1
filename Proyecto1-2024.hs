@@ -1,3 +1,4 @@
+{-# LANGUAGE NPlusKPatterns #-}
 -- 1. Programa las siguientes funciones:
 -- 1a) esCero :: Int -> Bool, que verifica si un entero es igual a 0.
 esCero :: Int -> Bool
