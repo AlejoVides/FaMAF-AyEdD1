@@ -169,25 +169,22 @@ factorial' n = productoria [1..n]
 
 
 -- 6g) Programar la funcion multiplicaPrimos :: [Int] -> Int que calcula el producto de todos los numeros primos de una lista.
--- funcion auxiliar para multiplicaPrimos.
-primos :: Int -> Int
-primos n | esPrimo n = n
-         | otherwise = 1
-
 multiplicaPrimos :: [Int] -> Int
 multiplicaPrimos xs = productoria' xs primos
+    where
+      primos n | esPrimo n = n
+               | otherwise = 1
+
 --  multiplicaPrimos [1,2,3,4] = 6
 --  multiplicaPrimos [2,3,4,6] = 6
 
 
 -- 6h) Programar la funcion esFib :: Int -> Bool, que dado un entero n, devuelve True si y solo si n esta en la sucesion de Fibonacci.
--- funcion auxiliar para esFib.
-fib :: Int -> Int
-fib n | (n<=1) = n
-      | otherwise = fib(n-1) + fib(n-2)
-
 esFib :: Int -> Bool
 esFib n = pertenece n (map fib [1..(n+1)])
+    where
+      fib n | (n<=1) = n
+            | otherwise = fib(n-1) + fib(n-2)
 -- esFib 13 = True
 -- esFib 14 = False
 
@@ -247,7 +244,7 @@ todosFib xs = paratodo' xs esFib
 -- 8a) Definila usando recursion.
 duplica :: [Int] -> [Int]
 duplica [] = []
-duplica (x:xs) = (x+x) : duplica xs
+duplica (x:xs) = (x+x):duplica xs
 -- duplica [2,3,4,5] = [4,6,8,10]
 -- duplica [-6,-5,-4] = [-12,-10,-8]
 
@@ -261,7 +258,7 @@ duplica' xs = map (*2) xs
 -- 9a) Definila usando recursion.
 sonPrimos :: [Int] -> [Int]
 sonPrimos [] = []
-sonPrimos (x:xs) | (esPrimo x) = x : sonPrimos xs
+sonPrimos (x:xs) | (esPrimo x) = x:sonPrimos xs
                  | otherwise = sonPrimos xs
 -- sonPrimos [3,4,5] = [3,5]
 -- sonPrimos [7,8,9] = [7]
@@ -286,7 +283,7 @@ multiplicaPrimos' (x:xs) = productoria (filter esPrimo (x:xs))
 -- 10a) Programa primIgualesA por recursion.
 primIgualesA :: Eq a => a -> [a] -> [a]
 primIgualesA e [] = []
-primIgualesA e (x:xs) | (e == x) = x : primIgualesA e xs
+primIgualesA e (x:xs) | (e == x) = x:primIgualesA e xs
                       | otherwise = []
 -- primIgualesA 3 [3,3,4,1] = [3,3]
 -- primIgualesA 3 [4,3,3,4,1] = []
@@ -304,7 +301,7 @@ primIgualesA' n xs = takeWhile (== n) xs
 -- 11a) Programa primIguales por recursion.
 primIguales :: Eq a => [a] -> [a]
 primIguales [] = []
-primIguales (x:xs) | (x == head xs) = x : primIguales xs
+primIguales (x:xs) | (x == head xs) = x:primIguales xs
                    | otherwise = x : []
 -- primIguales [3,3,4,1] = [3,3]
 -- primIguales [4,3,3,4,1] = [4]
