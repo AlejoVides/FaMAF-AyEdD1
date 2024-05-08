@@ -36,7 +36,7 @@ int main(void) {
 
 /*
 gcc -Wall -Wextra -std=c99 ej2-debugging.c -o ej2
-./2024-2
+./ej2
 Ingrese un valor para x: 4
 Ingrese un valor para y: -4
 Ingrese un valor para z: 8
