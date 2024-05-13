@@ -18,7 +18,7 @@ int absoluto(int n) {
 int main(void) {
 	int n = pedirEntero();
 	int abs = absoluto(n);
-	assert(n >= 0);
+	assert(abs >= 0);
 	printf("%d\n", abs);
 	return 0;
 }
