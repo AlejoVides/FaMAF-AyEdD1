@@ -11,7 +11,6 @@ int pedirEntero(void) {
 int main(void) {
 	int x = pedirEntero();
 	int y = pedirEntero();
-	int z = pedirEntero();
 
 	z = x;
 	x = y;
@@ -33,12 +32,10 @@ gcc -Wall -Wextra -std=c99 ej04-intercambio.c -o ej4
 ./ej4
 Ingrese un valor entero: 1
 Ingrese un valor entero: 2
-Ingrese un valor entero: 3
 x = 2, y = 1
 
 ./ej4
 Ingrese un valor entero: 7
 Ingrese un valor entero: 4
-Ingrese un valor entero: 1
 x = 4, y = 7
 */
