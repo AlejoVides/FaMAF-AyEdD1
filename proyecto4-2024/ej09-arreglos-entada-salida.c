@@ -1,18 +1,18 @@
 #include <stdio.h>
 #define N 5
 
-void pedirArreglo(int n_max, int a[]) {
+void pedirArreglo(int nMax, int a[]) {
 	int i = 0;
-	while (i < n_max) {
+	while (i < nMax) {
 		printf("Ingrese el indice %d: ", i);
 		scanf("%d", &a[i]);
 		i++;
 	}
 }
 
-void imprimirArreglo(int n_max, int a[]) {
+void imprimirArreglo(int nMax, int a[]) {
 	int i = 0;
-    while (i < n_max) {
+    while (i < nMax) {
 		printf("a[%d] = %d  ", i, a[i]);
     	i++;
     }

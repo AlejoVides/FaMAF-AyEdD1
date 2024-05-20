@@ -2,10 +2,10 @@
 #include <assert.h>
 
 int pedirEntero(void) {
-	int x;
+	int var;
 	printf("Ingrese un valor entero: ");
-	scanf("%d", &x);
-	return x;
+	scanf("%d", &var);
+	return var;
 }
 
 int absoluto(int n) {
@@ -27,7 +27,7 @@ int main(void) {
 	Var n : Int;
 	{ P: True }
 	if n >= 0 -> skip
-	[] n < 0 -> n := -n	
+	[] n < 0 -> n := -n
 	fi
 	{ Q: n >= 0 }
 

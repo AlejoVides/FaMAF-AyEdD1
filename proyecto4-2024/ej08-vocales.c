@@ -2,10 +2,10 @@
 #include <stdbool.h>
 
 char pedirChar(void) {
-	char c;
+	char ch;
 	printf("Ingrese un caracter: ");
-	scanf("%c", &c);
-	return c;
+	scanf("%c", &ch);
+	return ch;
 }
 
 bool esVocal(char letra) {

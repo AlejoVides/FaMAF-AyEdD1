@@ -2,25 +2,27 @@
 #include <assert.h>
 
 int pedirEntero(void) {
-	int x;
+	int var;
 	printf("Ingrese un valor entero: ");
-	scanf("%d", &x);
-	return x;
+	scanf("%d", &var);
+	return var;
 }
 
 int minimo(int x, int y) {
+	int min;
 	if (x >= y) {
-		return y;
+		min = y;
 	} else {
-		return x;
+		min = x;
 	}
+	return min;
 }
 
 int main(void) {
 	int x = pedirEntero();
 	int y = pedirEntero();
 	int min = minimo(x, y);
-	assert(min < x || min < y);
+	assert(min == minimo(x, y));
 	printf("%d\n", min);
 	return 0;
 }
@@ -28,10 +30,10 @@ int main(void) {
 /*
 	Const x, y : Int;
 	{ P: True }
-	if x <= y -> x
-	[] x > y -> y
+	if x >= y -> min := y
+	[] x < y -> min := x
 	fi
-	{ Q: x min y }
+	{ Q: min = 	Min.x.y }
 
 gcc -Wall -Wextra -std=c99 ej02-minimo.c -o ej2
 ./ej2

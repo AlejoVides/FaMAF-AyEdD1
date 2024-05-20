@@ -2,10 +2,10 @@
 #include <assert.h>
 
 int pedirEntero(void) {
-	int x;
+	int var;
 	printf("Ingrese un valor entero: ");
-	scanf("%d", &x);
-	return x;
+	scanf("%d", &var);
+	return var;
 }
 
 void holaHasta(int n) {
@@ -24,7 +24,6 @@ int main(void) {
 
 
 /*
-gcc -Wall -Wextra -std=c99 ej01-ejercicio01.c -o ej1
 ./ej1
 Ingrese un valor entero: 1
 Hola

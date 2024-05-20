@@ -2,9 +2,9 @@
 #include <assert.h>
 #define N 5
 
-void pedirArreglo(int n_max, int a[]) {
+void pedirArreglo(int nMax, int a[]) {
 	int i = 0;
-	while (i < n_max) {
+	while (i < nMax) {
 		printf("Ingrese el indice %d: ", i);
 		scanf("%d", &a[i]);
 		i++;
@@ -18,9 +18,9 @@ int pedirEntero(int tam) {
 	return x;
 }
 
-void imprimirArreglo(int n_max, int a[]) {
+void imprimirArreglo(int nMax, int a[]) {
 	int i = 0;
-    while (i < n_max) {
+    while (i < nMax) {
 		printf("a[%d] = %d  ", i, a[i]);
     	i++;
     }
@@ -28,12 +28,10 @@ void imprimirArreglo(int n_max, int a[]) {
 }
 
 void intercambiar(int tam, int a[], int i, int j) {
-	int iaux, jaux;
-	iaux = a[i];
-	jaux = a[j];
+	int aux = a[i];
 	assert(i < tam && j < tam && i != j);
-	a[i] = jaux;
-	a[j] = iaux;
+	a[i] = a[j];
+	a[j] = aux;
 }
 
 int main(void) {
@@ -54,7 +52,7 @@ Ingrese el indice 1: 2
 Ingrese el indice 2: 3
 Ingrese el indice 3: 4
 Ingrese el indice 4: 5
-Ingrese un indice del 0 al 4 para intercambiar: 0
 Ingrese un indice del 0 al 4 para intercambiar: 1
-a[0] = 2  a[1] = 1  a[2] = 3  a[3] = 4  a[4] = 5  
+Ingrese un indice del 0 al 4 para intercambiar: 2
+a[0] = 1  a[1] = 3  a[2] = 2  a[3] = 4  a[4] = 5  
 */

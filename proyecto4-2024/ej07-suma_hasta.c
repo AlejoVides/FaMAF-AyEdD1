@@ -2,16 +2,16 @@
 #include <assert.h>
 
 int pedirEntero(void) {
-	int x;
+	int var;
 	printf("Ingrese un valor entero: ");
-	scanf("%d", &x);
-	return x;
+	scanf("%d", &var);
+	return var;
 }
 
 int sumaHasta(int n) {
 	int sum = 0;
-	assert (n>=0);
-	while(n>=0) {
+	assert (n >= 0);
+	while(n >= 0) {
 		sum = sum + n;
 		n--;
 	}
