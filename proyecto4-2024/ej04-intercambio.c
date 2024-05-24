@@ -11,11 +11,11 @@ int pedirEntero(void) {
 int main(void) {
 	int x = pedirEntero();
 	int y = pedirEntero();
-	int xAux = x;
-	int yAux = y;
-	x = yAux;
-	y = xAux;
-	assert(x == yAux && y == xAux);
+	int X = x;
+	int Y = y;
+	x = Y;
+	y = X;
+	assert(x == Y && y == X);
 	printf("x = %d, y = %d\n", x, y);
 	return 0;
 }
