@@ -11,11 +11,11 @@ int pedirEntero(void) {
 int main(void) {
 	int x = pedirEntero();
 	int y = pedirEntero();
-
-	z = x;
-	x = y;
-	y = z;
-	assert(x == y && y == z);
+	int xAux = x;
+	int yAux = y;
+	x = yAux;
+	y = xAux;
+	assert(x == yAux && y == xAux);
 	printf("x = %d, y = %d\n", x, y);
 	return 0;
 }
@@ -23,9 +23,7 @@ int main(void) {
 /*
 	Var x, y, z : Int;
 	{ P: True }
-	z := x;
-	x := y;
-	y := z;
+	x, y := y, x;
 	{ Q: x, y := y, x }
 
 gcc -Wall -Wextra -std=c99 ej04-intercambio.c -o ej4
