@@ -20,22 +20,21 @@ void pedirArreglo(int nMax, int a[]) {
 	}
 }
 
-int sum(int begg, int end, int a[]) {
-    int i = begg;
+int sum(int i, int j, int a[]) {
+    int itr = i;
     int res = 0;
-    while (i < end) {
-        res = res + a[i];
-        i++;
+    while (itr < j) {
+        res = res + a[itr];
+        itr++;
     }
     return res;
 }
 
 int segSumMax(int tam, int a[]) {
     int i = 0;
-    int j = 0;
     int res = INT_MIN;
     while (i < tam) {
-        j = i;
+        int j = i;
         while (j < tam) {
             int resAux = sum(i, j, a);
             if (resAux > res) {
