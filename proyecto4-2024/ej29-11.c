@@ -7,8 +7,6 @@
 */
 
 #include <stdio.h>
-#include <limits.h>
-#include <assert.h>
 #define N 5
 
 void pedirArreglo(int nMax, int a[]) {
@@ -20,38 +18,30 @@ void pedirArreglo(int nMax, int a[]) {
 	}
 }
 
-int sum(int i, int j, int a[]) {
-    int itr = i;
-    int res = 0;
-    while (itr < j) {
-        res = res + a[itr];
-        itr++;
-    }
-    return res;
-}
+int kadane(int tam, int a[]) {
+    int i = 1;
+    int maximoActual = a[0];
+    int maximoGlobal = a[0];
 
-int segSumMax(int tam, int a[]) {
-    int i = 0;
-    int res = INT_MIN;
     while (i < tam) {
-        int j = i;
-        while (j < tam) {
-            int resAux = sum(i, j, a);
-            if (resAux > res) {
-                res = resAux;
-            }
-            j++;
-            }
-        i++;
-    }
-    return res;
+        if (a[i] > maximoActual + a[i]) {
+            maximoActual = a[i];
+        } else {
+            maximoActual = maximoActual + a[i];
+        }
+
+        if (maximoActual > maximoGlobal) {
+            maximoGlobal = maximoActual;
+        }
+        i++;   
+        }
+    return maximoGlobal;
 }
 
 int main(void) {
     int a[N];
     pedirArreglo(N, a);
-    assert(N >= 0);
-    int res = segSumMax(N, a);
+    int res = kadane(N, a);
     printf("El segmento de suma maxima es %d", res);
     return 0;
 }
@@ -59,17 +49,18 @@ int main(void) {
 /*
 gcc -Wall -Wextra -std=c99 ej29-11.c -o ej29
 ./ej29
-Ingrese el indice 0: -3  
-Ingrese el indice 1: -4
-Ingrese el indice 2: 5
-Ingrese el indice 3: 6
-11
+Ingrese el indice 0: -99
+Ingrese el indice 1: 1
+Ingrese el indice 2: 2
+Ingrese el indice 3: -1
+Ingrese el indice 4: 5
+El segmento de suma maxima es 7
 
 ./ej29
-Ingrese el indice 0: -3
-Ingrese el indice 1: 5
-Ingrese el indice 2: -4
-Ingrese el indice 3: 6
-Ingrese el indice 4: -9
-7
+Ingrese el indice 0: -12
+Ingrese el indice 1: 9
+Ingrese el indice 2: 4
+Ingrese el indice 3: -5
+Ingrese el indice 4: 2
+El segmento de suma maxima es 13
 */
