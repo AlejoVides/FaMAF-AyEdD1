@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include <assert.h>
 #define N 5
 
 void pedirArreglo(int nMax, int a[]) {
@@ -39,7 +38,6 @@ int diffMinMax(int tam, int a[]) {
 int main(void) {
     int a[N];
     pedirArreglo(N, a);
-    assert(N >= 2);
     int res = diffMinMax(N, a);
     printf("la diferencia entre el valor mas grande y mas chico del arreglo es %d", res);
     return 0;
