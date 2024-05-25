@@ -13,7 +13,7 @@ void pedirArreglo(int nMax, int a[]) {
 int sumatoria(int tam, int a[]) {
 	int i = 0;
 	int sum = 0;
-	while(i < tam) {
+	while (i < tam) {
 		sum = sum + a[i];
 		i++;
 	}

@@ -1,3 +1,12 @@
+/*
+	Const x, y : Int;
+	{ P: True }
+	if x >= y -> min := y
+	[] x < y -> min := x
+	fi
+	{ Q: min = Min.x.y }
+*/
+
 #include <stdio.h>
 #include <assert.h>
 
@@ -28,13 +37,6 @@ int main(void) {
 }
 
 /*
-	Const x, y : Int;
-	{ P: True }
-	if x >= y -> min := y
-	[] x < y -> min := x
-	fi
-	{ Q: min = 	Min.x.y }
-
 gcc -Wall -Wextra -std=c99 ej02-minimo.c -o ej2
 ./ej2
 Ingrese un valor entero: 2

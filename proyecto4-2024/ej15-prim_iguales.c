@@ -12,7 +12,7 @@ void pedirArreglo(int nMax, int a[]) {
 
 void imprimirArreglo(int nMax, int a[]) {
 	int i = 0;
-    while (i < n_max) {
+    while (i < nMax) {
 		printf("a[%d] = %d  ", i, a[i]);
     	i++;
     }
@@ -21,8 +21,8 @@ void imprimirArreglo(int nMax, int a[]) {
 
 int primIguales(int tam, int a[]) {
 	int i = 1;
-	while(i < tam) {
-		if(a[0] != a[i]) {
+	while (i < tam) {
+		if (a[0] != a[i]) {
 			imprimirArreglo(i, a);
 			return i;
 		}

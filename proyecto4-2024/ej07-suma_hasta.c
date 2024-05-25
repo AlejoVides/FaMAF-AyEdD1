@@ -10,8 +10,8 @@ int pedirEntero(void) {
 
 int sumaHasta(int n) {
 	int sum = 0;
-	assert (n >= 0);
-	while(n >= 0) {
+	assert(n >= 0);
+	while (n >= 0) {
 		sum = sum + n;
 		n--;
 	}

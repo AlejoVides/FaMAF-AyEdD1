@@ -1,3 +1,12 @@
+/*
+	Var n : Int;
+	{ P: True }
+	if n >= 0 -> skip
+	[] n < 0 -> n := -n
+	fi
+	{ Q: n >= 0 }
+*/
+
 #include <stdio.h>
 #include <assert.h>
 
@@ -9,7 +18,7 @@ int pedirEntero(void) {
 }
 
 int absoluto(int n) {
-	if(n < 0) {
+	if (n < 0) {
 		return (-n);
 	}
 	return n;
@@ -24,13 +33,6 @@ int main(void) {
 }
 
 /*
-	Var n : Int;
-	{ P: True }
-	if n >= 0 -> skip
-	[] n < 0 -> n := -n
-	fi
-	{ Q: n >= 0 }
-
 gcc -Wall -Wextra -std=c99 ej03-absoluto.c -o ej3
 ./ej3
 Ingrese un valor entero: 4

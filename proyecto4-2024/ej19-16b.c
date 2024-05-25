@@ -14,7 +14,7 @@ void ej16b(int y, int N) {
 	assert(y == Y && N >= 0);
 	int x = 1;
 	int n = 0;
-	while(n != N) {
+	while (n != N) {
 		x = x * y;
 		n++;
 	}

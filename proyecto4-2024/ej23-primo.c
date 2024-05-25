@@ -25,9 +25,9 @@ int esPrimo(int n) {
 int nesimoPrimo(int N) {
 	int n = 1;
 	int primos = 0;
-	while(primos != N) {
+	while (primos != N) {
 		n++;
-		if(esPrimo(n)) {
+		if (esPrimo(n)) {
 			primos++;
 		}
 	}

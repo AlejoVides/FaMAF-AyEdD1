@@ -14,7 +14,7 @@ void pedirArreglo(int nMax, int a[]) {
 
 bool todosPares(int tam, int a[]) {
 	int i = 0;
-	while(i < tam) {
+	while (i < tam) {
 		if (a[i] % 2 != 0) {
 			return false;
 		}
@@ -25,7 +25,7 @@ bool todosPares(int tam, int a[]) {
 
 bool existeMultiplo(int m, int tam, int a[]) {
 	int i = 0;
-	while(i < tam) {
+	while (i < tam) {
 		if (a[i] % m == 0) {
 			return true;
 		}
@@ -37,26 +37,21 @@ bool existeMultiplo(int m, int tam, int a[]) {
 int main(void) {
 	int a[N], m, cualFuncion, res;
 	pedirArreglo(N, a);
-
 	printf("Ingrese un valor:\n 0 = todosPares()\n 1 = existeMultiplo()\n");
 	scanf("%d",&cualFuncion);
 	assert(cualFuncion == 0 || cualFuncion == 1);
-
-	if(cualFuncion == 0) {
+	if (cualFuncion == 0) {
 		res = todosPares(N, a);
 	} else {
 		printf("Ingrese un valor para m: ");
 		scanf("%d", &m);
 		res = existeMultiplo(m, N, a);
-		
 	}
-
-	if(res == 0) {
+	if (res == 0) {
 		printf("false\n");
 	} else {
 		printf("true\n");
 	}
-
 	return 0;
 }
 

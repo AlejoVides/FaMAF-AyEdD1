@@ -26,8 +26,8 @@ int minimoPares(int tam, int a[]) {
 int minimoImpares(int tam, int a[]) {
 	int minaux = INT_MAX;
 	int i = 0;
-	while(i < tam){
-		if(a[i] % 2 != 0 && a[i] < minaux) {
+	while (i < tam){
+		if (a[i] % 2 != 0 && a[i] < minaux) {
 			minaux = a[i];
 		}
 		i++;

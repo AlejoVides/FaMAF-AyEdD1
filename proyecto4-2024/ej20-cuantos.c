@@ -29,10 +29,10 @@ struct compT cuantos(int tam, int a[], int elem) {
 	res.menores = 0;
 	res.iguales = 0;
 	res.mayores = 0;
-	while(i < tam) {
-		if(a[i] < elem) {
+	while (i < tam) {
+		if (a[i] < elem) {
 			res.menores++;
-		} else if(a[i] > elem) {
+		} else if (a[i] > elem) {
 			res.mayores++;
 		} else {
 			res.iguales++;

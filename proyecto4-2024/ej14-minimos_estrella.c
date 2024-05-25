@@ -27,8 +27,8 @@ int minimoPares(int tam, int a[]) {
 int minimoImpares(int tam, int a[]) {
 	int minaux = INT_MAX;
 	int i = 0;
-	while(i < tam){
-		if(a[i] % 2 != 0 && a[i] < minaux) {
+	while (i < tam) {
+		if (a[i] % 2 != 0 && a[i] < minaux) {
 			minaux = a[i];
 		}
 		i++;
@@ -38,7 +38,7 @@ int minimoImpares(int tam, int a[]) {
 
 bool todosPares(int tam, int a[]) {
 	int i = 0;
-	while(i < tam) {
+	while (i < tam) {
 		if (a[i] % 2 != 0) {
 			return false;
 		}
@@ -49,7 +49,7 @@ bool todosPares(int tam, int a[]) {
 
 bool existeMultiplo(int m, int tam, int a[]) {
 	int i = 0;
-	while(i < tam) {
+	while (i < tam) {
 		if (a[i] % m == 0) {
 			return true;
 		}
@@ -65,18 +65,17 @@ int main(void) {
 	int minImpar = minimoImpares(N, a);
 	bool noExisteImpar = todosPares(N, a);
 	bool existePar = existeMultiplo(2, N, a);
-
-	if(existePar) {
+	if (existePar) {
 		printf("minimoPares(N, a) = %d\n", minPar);
 	} else {
 		printf("El array no contiene numeros pares\n");
 	}
-	if(noExisteImpar) {
+	if (noExisteImpar) {
 		printf("El array no contiene numeros impares\n");
 	} else {
 		printf("minimoImpares(N, a) = %d\n", minImpar);
 	}
-	if(minPar < minImpar) {
+	if (minPar < minImpar) {
 		printf("El minimo numero del array es = %d\n", minPar);
 	} else {
 		printf("El minimo numero del array es = %d\n", minImpar);

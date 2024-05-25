@@ -24,6 +24,7 @@ int main(void) {
 
 
 /*
+gcc -Wall -Wextra -std=c99 ej01-ejercicio01.c -o ej1
 ./ej1
 Ingrese un valor entero: 1
 Hola

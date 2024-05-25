@@ -22,8 +22,8 @@ void pedirArreglo(int nMax, int a[]) {
 bool compararArreglo(int a[]) {
 	int b[N] = {2, 10, 10, -1};
 	int i = 0;
-	while (i < N){ 
-		if (a[i] != b[i]){
+	while (i < N) { 
+		if (a[i] != b[i]) {
 			return false;
 		}
 		i++;
@@ -32,10 +32,10 @@ bool compararArreglo(int a[]) {
 }
 
 void ej10a(int i, int s, int a[], bool res) {
-	assert((i == -3) && (s == 5) && res);
+	assert(i == -3 && s == 5 && res);
 	i = 0;
 	s = 0;
-	while (i < 4){
+	while (i < 4) {
 		s = s + a[i];
 		i++;
 	}

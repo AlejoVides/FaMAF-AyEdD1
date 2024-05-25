@@ -10,8 +10,8 @@ int pedirEntero(void) {
 
 int menorQueN(int N) {
 	int x = 0;
-	while(x < N) {
-		if((x * x * x + x) >= N) {
+	while (x < N) {
+		if ((x * x * x + x) >= N) {
 			return x;
 		}
 		x++;
@@ -32,3 +32,14 @@ int main(void) {
 	assert((res * res * res + res) >= N);
 	return 0;
 }
+
+/*
+gcc -Wall -Wextra -std=c99 ej25-2.c -o ej25
+./ej25
+Ingrese un valor entero: 4
+El menor x tal que se cumple (x^3 + x >= 4) es 2
+
+./ej25
+Ingrese un valor entero: 71
+El menor x tal que se cumple (x^3 + x >= 71) es 5
+*/

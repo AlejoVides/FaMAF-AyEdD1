@@ -23,10 +23,10 @@ struct datosT stats(int tam, float a[]) {
 	float minaux = FLT_MAX;
 	float prom = 0;
 	int i = 0;
-	while(i < tam) {
-		if(a[i] > maxaux) {
+	while (i < tam) {
+		if (a[i] > maxaux) {
 			maxaux = a[i];
-		} else if(a[i] < minaux) {
+		} else if (a[i] < minaux) {
 			minaux = a[i];
 		}
 		prom = prom + a[i];

@@ -29,8 +29,8 @@ char pedirClave() {
 
 bool asocExiste(int tam, struct asoc a[], claveT c) {
 	int i = 0;
-	while(i < tam) {
-		if(a[i].clave == c) {
+	while (i < tam) {
+		if (a[i].clave == c) {
 			return true;
 		}
 		i++;
@@ -43,7 +43,7 @@ int main(void) {
 	pedirArregloAsoc(N, a);
 	claveT clave = pedirClave();
 	bool res = asocExiste(N, a, clave);
-	if(res) {
+	if (res) {
 		printf("La clave '%c' si existe en el arreglo\n", clave);
 	} else {
 		printf("La clave '%c' no existe en el arreglo\n", clave);
