@@ -22,7 +22,6 @@ int main(void) {
 	return 0;
 }
 
-
 /*
 gcc -Wall -Wextra -std=c99 ej01-ejercicio01.c -o ej1
 ./ej1
