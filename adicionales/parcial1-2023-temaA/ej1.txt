@@ -1,0 +1,46 @@
+a) Si tengo una función con la siguiente declaración de tipos de la función f
+    f :: Eq a => [a] -> (a -> b) -> b puedo decir que:
+        1. Es una función polimórfica Paramétrica.
+        2. Es una función polimórfica Ad hoc.
+        3. Es una función recursiva.
+        4. Es un constructor.
+        5. Ninguna de las anteriores.
+
+Rta: 2 Es una función polimórfica Ad hoc.
+
+b) Si tengo una función con la siguiente declaración
+    f :: Eq a => a -> a -> a
+    f x y | x<y = x
+          | otherwise = y
+    Puedo decir que:
+        1. Es una función polimórfica paramétrica.
+        2. La declaración de tipos está mal, porque debería incluir otra clase de tipos.
+        3. La definición de la función es incorrecta, debería utilizar pattern matching.
+        4. Es un constructor.
+        5. Ninguna de las anteriores.
+
+Rta: 2 La declaración de tipos está mal, porque debería incluir otra clase de tipos.
+
+c) Dada la siguiente declaración de función en Haskell:
+    incrementar :: Int -> Maybe Int
+    incrementar maxBound = Nothing
+    incrementar x = Just (x + 1)
+    ¿Cuál es el propósito de la función incrementar y cómo maneja el valor maxBound?
+        1. La función incrementar lanza un error cuando se le pasa Nothing.
+        2. La función incrementar siempre devuelve Just 1 independientemente de su entrada.
+        3. La función incrementar solo funciona con valores Nothing y no con Just.
+        4. Devuelve Just del valor que toma incrementado en 1 o Nothing si se le pasa maxBound.
+        5. Ninguna de las anteriores.
+
+Rta: 5 Ninguna de las anteriores.
+
+d) Dada la siguiente declaración de tipos en Haskell:
+    data Quizas a = Nada | Algo a
+    Puedo afirmar que:
+        1. Ese tipo está mal definido, debería haber utilizado el comando type.
+        2. El tipo está mal definido porque ambos constructores no toman parámetros.
+        3. El tipo Quizas tiene dos constructores, uno sin parámetros y el otro constructor con un parámetro.
+        4. No se puede definir un tipo de esa manera.
+        5. Ninguna de las anteriores.
+
+Rta: 3 El tipo Quizas tiene dos constructores, uno sin parámetros y el otro constructor con un parámetro.
