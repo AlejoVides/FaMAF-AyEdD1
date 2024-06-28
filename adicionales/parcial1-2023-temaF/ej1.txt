@@ -1,0 +1,44 @@
+a) Si tengo una función definida de la siguiente manera:
+    f :: [a] -> a
+    puedo decir que:
+        1. Es una función que usa alto orden.
+        2. Es un función polimórfica Ad hoc.
+        3. Es la función identidad.
+        4. Es una función polimórfica paramétrica.
+        5. Es una función recursiva.
+
+Rta: 4 Es una función polimórfica paramétrica.
+
+b) Si tengo una función con la siguiente declaración:
+    f :: Integral a => a -> a -> Maybe a
+    f x 0 = Nothing
+    f x y = Just (mod x y)
+    puedo decir que:
+        1. Es un función polimórfica paramétrica.
+        2. La declaración de tipos está mal, porque debería incluir la clase Num.
+        3. La definición de la función es incorrecta, debería utilizar case.
+        4. Es un constructor.
+        5. Ninguna de las anteriores.
+
+Rta: 5 Ninguna de las anteriores.
+
+c) En Haskell la expresión:
+    (+1)
+        1. Es una expresión inválida.
+        2. Es una función polimórfica adhoc.
+        3. Es un constructor del tipo Int.
+        4. Es equivalente a 1.
+        5. Ninguna de las anteriores.
+
+Rta: 5 Ninguna de las anteriores.
+
+d) En la definición:
+    data T a = A | B a | C
+    Según la definición T es
+        1. Una función que depende de a.
+        2. Es un tipo recursivo porque el tipo a aparece tanto del lado izquierdo como en el lado derecho de la definición.
+        3. Es un tipo enumerado.
+        4. Es un tipo algebráico polimórfico.
+        5. Es un sinónimo de tipo.
+
+Rta: 4 Es un tipo algebráico polimórfico.
